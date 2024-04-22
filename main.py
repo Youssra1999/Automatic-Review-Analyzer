@@ -101,14 +101,11 @@ utils.plot_tune_results('Pegasos', 'L', Ls, *peg_tune_results_L)
 #Pegasos Algo as a best Method 
 
 
+T = 25  # Optimal value determined from validation
+L = 0.01  # Optimal value determined from validation
 
-
-
-
-
-
-
-
+test_accuracy = p1.classifier_accuracy(p1.pegasos, train_bow_features, test_bow_features, train_labels, test_labels, T=T, L=L)
+print("{:43} {:.4f}".format("Test accuracy for Pegasos:", test_accuracy))
 
 
 
