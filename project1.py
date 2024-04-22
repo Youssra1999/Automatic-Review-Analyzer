@@ -123,37 +123,27 @@ def pegasos_single_step_update(
 
 
 
-def pegasos(feature_matrix, labels, T, L):
-    """
-    Runs the Pegasos algorithm on a given set of data. Runs T
-    iterations through the data set, there is no need to worry about
-    stopping early.
+def pegasos_single_step_update(
+    feature_vector,  # Input feature vector for the data point.
+    label,  # Label of the data point.
+    L,  # Regularization parameter.
+    eta,  # Learning rate.
+    current_theta,  # Current weight vector.
+    current_theta_0):  # Current bias term.
 
-    For each update, set learning rate = 1/sqrt(t),
-    where t is a counter for the number of updates performed so far (between 1
-    and nT inclusive).
+    # Check if the data point is correctly classified or not.
+    if label * (np.sum(feature_vector * current_theta) + current_theta_0) <= 1:
+        # Update the weight vector and bias term if the data point is correctly classified.
+        new_theta = (1 - eta * L) * current_theta + eta * label * feature_vector
+        new_theta_0 = current_theta_0 + eta * label
+    else:
+        # Update only the weight vector if the data point is misclassified.
+        new_theta = (1 - eta * L) * current_theta
+        new_theta_0 = current_theta_0
+    
+    # Return the updated weight vector and bias term.
+    return (new_theta, new_theta_0)
 
-    NOTE: Please use the previously implemented functions when applicable.
-    Do not copy paste code from previous parts.
-
-    Args:
-        feature_matrix - A numpy matrix describing the given data. Each row
-            represents a single data point.
-        labels - A numpy array where the kth element of the array is the
-            correct classification of the kth row of the feature matrix.
-        T - An integer indicating how many times the algorithm
-            should iterate through the feature matrix.
-        L - The lamba value being used to update the Pegasos
-            algorithm parameters.
-
-    Returns: A tuple where the first element is a numpy array with the value of
-    the theta, the linear classification parameter, found after T
-    iterations through the feature matrix and the second element is a real
-    number with the value of the theta_0, the offset classification
-    parameter, found after T iterations through the feature matrix.
-    """
-    # Your code here
-    raise NotImplementedError
 
 # Part II
 
