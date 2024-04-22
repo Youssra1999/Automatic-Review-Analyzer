@@ -107,8 +107,6 @@ L = 0.01  # Optimal value determined from validation
 test_accuracy = p1.classifier_accuracy(p1.pegasos, train_bow_features, test_bow_features, train_labels, test_labels, T=T, L=L)
 print("{:43} {:.4f}".format("Test accuracy for Pegasos:", test_accuracy))
 
-
-
 #-------------------------------------------------------------------------------
 # Assign to best_theta, the weights (and not the bias!) learned by your most
 # accurate algorithm with the optimal choice of hyperparameters.
