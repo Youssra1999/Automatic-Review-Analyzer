@@ -128,17 +128,33 @@ def pegasos_single_step_update(
 
 def pegasos(feature_matrix, labels, T, L):
 
+    # Get the shape of the feature matrix.
     (nsamples, nfeatures) = feature_matrix.shape
+
+    # Initialize the weight vector and bias term.
     theta = np.zeros(nfeatures)
     theta_0 = 0
+    
+    # Initialize counter for the number of updates.
     count = 0
+    
+    # Iterate over the specified number of iterations.
     for t in range(T):
+        # Iterate over the data points in a random order.
         for i in get_order(nsamples):
+            # Increment the update count.
             count += 1
+            
+            # Calculate the learning rate (eta) for the current iteration.
             eta = 1.0 / np.sqrt(count)
+            
+            # Perform a single step update of the Pegasos algorithm.
             (theta, theta_0) = pegasos_single_step_update(
                 feature_matrix[i], labels[i], L, eta, theta, theta_0)
+    
+    # Return the trained weight vector and bias term.
     return (theta, theta_0)
+
 
 # Part II
 
