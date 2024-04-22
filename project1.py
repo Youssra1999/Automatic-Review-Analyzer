@@ -105,8 +105,6 @@ def average_perceptron(feature_matrix, labels, T):
     
     return (theta_final, theta_0_final)
 
-
-
 def pegasos_single_step_update(
         feature_vector,
         label,
@@ -114,27 +112,15 @@ def pegasos_single_step_update(
         eta,
         current_theta,
         current_theta_0):
-    """
-    Properly updates the classification parameter, theta and theta_0, on a
-    single step of the Pegasos algorithm
+   
+    if label * (np.sum(feature_vector * current_theta) + current_theta_0) <= 1 :
+        new_theta = (1 - eta*L)*current_theta  +  eta*label*feature_vector
+        new_theta_0 = current_theta_0 + eta*label 
+    else:
+        new_theta = (1 - eta*L)*current_theta
+        new_theta_0 = current_theta_0
+    return (new_theta, new_theta_0)
 
-    Args:
-        feature_vector - A numpy array describing a single data point.
-        label - The correct classification of the feature vector.
-        L - The lamba value being used to update the parameters.
-        eta - Learning rate to update parameters.
-        current_theta - The current theta being used by the Pegasos
-            algorithm before this update.
-        current_theta_0 - The current theta_0 being used by the
-            Pegasos algorithm before this update.
-
-    Returns: A tuple where the first element is a numpy array with the value of
-    theta after the current update has completed and the second element is a
-    real valued number with the value of theta_0 after the current updated has
-    completed.
-    """
-    # Your code here
-    raise NotImplementedError
 
 
 def pegasos(feature_matrix, labels, T, L):
