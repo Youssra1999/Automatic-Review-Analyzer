@@ -7,33 +7,35 @@ import random
 
 def get_order(n_samples):
     try:
+        # Try to open a file with the name 'n_samples.txt'
         with open(str(n_samples) + '.txt') as fp:
+            # Read the first line from the file
             line = fp.readline()
+            # Split the line by commas and convert each element to an integer
             return list(map(int, line.split(',')))
     except FileNotFoundError:
+        # If the file is not found, generate a random order
+        # Set a seed for reproducibility
         random.seed(1)
+        # Generate a list of indices from 0 to n_samples - 1
         indices = list(range(n_samples))
+        # Shuffle the list randomly
         random.shuffle(indices)
+        # Return the shuffled list
         return indices
 
 
+
 def hinge_loss_single(feature_vector, label, theta, theta_0):
-    """
-    Finds the hinge loss on a single data point given specific classification
-    parameters.
+    # Calculate the dot product of feature_vector and theta, then add theta_0
+    h = np.sum(np.multiply(feature_vector, theta)) + theta_0
+    
+    # Calculate the hinge loss using the formula: max(0, 1 - h * label)
+    ret = max(0, 1 - h * label)
+    
+    # Return the calculated hinge loss
+    return ret
 
-    Args:
-        feature_vector - A numpy array describing the given data point.
-        label - A real valued number, the correct classification of the data
-            point.
-        theta - A numpy array describing the linear classifier.
-        theta_0 - A real valued number representing the offset parameter.
-
-
-    Returns: A real number representing the hinge loss associated with the
-    given data point and parameters.
-    """
-    # Your code here
     raise NotImplementedError
 
 
