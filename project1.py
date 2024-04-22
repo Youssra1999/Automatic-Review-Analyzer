@@ -157,26 +157,33 @@ def pegasos(feature_matrix, labels, T, L):
 
 # Part II
 
+# Automative review analyzer
 
 def classify(feature_matrix, theta, theta_0):
-    """
-    A classification function that uses theta and theta_0 to classify a set of
-    data points.
 
-    Args:
-        feature_matrix - A numpy matrix describing the given data. Each row
-            represents a single data point.
-                theta - A numpy array describing the linear classifier.
-        theta - A numpy array describing the linear classifier.
-        theta_0 - A real valued number representing the offset parameter.
+    # Get the shape of the feature matrix.
+    (nsamples, nfeatures) = feature_matrix.shape
 
-    Returns: A numpy array of 1s and -1s where the kth element of the array is
-    the predicted classification of the kth row of the feature matrix using the
-    given theta and theta_0. If a prediction is GREATER THAN zero, it should
-    be considered a positive classification.
-    """
-    # Your code here
-    raise NotImplementedError
+    # Initialize an array to store the predicted labels.
+    predictions = np.zeros(nsamples)
+    
+    # Iterate over each data point in the feature matrix.
+    for i in range(nsamples):
+        # Extract the feature vector for the current data point.
+        feature_vector = feature_matrix[i]
+        
+        # Calculate the prediction for the current data point.
+        prediction = np.dot(theta, feature_vector) + theta_0
+        
+        # Assign the predicted label based on the sign of the prediction.
+        if prediction > 0:
+            predictions[i] = 1
+        else:
+            predictions[i] = -1
+    
+    # Return the array of predicted labels.
+    return predictions
+
 
 
 def classifier_accuracy(
