@@ -40,25 +40,15 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
 
 
 def hinge_loss_full(feature_matrix, labels, theta, theta_0):
-    """
-    Finds the total hinge loss on a set of data given specific classification
-    parameters.
+    
+    # Calculate the raw hinge losses for each data point
+    raw_losses = np.maximum(0, 1 - labels * (np.sum(feature_matrix * theta, axis=1) + theta_0))
+    # Calculate the average hinge loss
+    avg_loss = np.mean(raw_losses)
+    return avg_loss
 
-    Args:
-        feature_matrix - A numpy matrix describing the given data. Each row
-            represents a single data point.
-        labels - A numpy array where the kth element of the array is the
-            correct classification of the kth row of the feature matrix.
-        theta - A numpy array describing the linear classifier.
-        theta_0 - A real valued number representing the offset parameter.
-
-
-    Returns: A real number representing the hinge loss associated with the
-    given dataset and parameters. This number should be the average hinge
-    loss across all of the points in the feature matrix.
-    """
-    # Your code here
     raise NotImplementedError
+   
 
 
 def perceptron_single_step_update(
