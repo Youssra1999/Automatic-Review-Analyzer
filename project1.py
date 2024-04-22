@@ -36,7 +36,7 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
     # Return the calculated hinge loss
     return ret
 
-    raise NotImplementedError
+
 
 
 def hinge_loss_full(feature_matrix, labels, theta, theta_0):
@@ -47,7 +47,6 @@ def hinge_loss_full(feature_matrix, labels, theta, theta_0):
     avg_loss = np.mean(raw_losses)
     return avg_loss
 
-    raise NotImplementedError
    
 
 
@@ -65,38 +64,23 @@ def perceptron_single_step_update(
     return (current_theta, current_theta_0)
 
 
-
 def perceptron(feature_matrix, labels, T):
-    """
-    Runs the full perceptron algorithm on a given set of data. Runs T
-    iterations through the data set, there is no need to worry about
-    stopping early.
 
-    NOTE: Please use the previously implemented functions when applicable.
-    Do not copy paste code from previous parts.
-
-    NOTE: Iterate the data matrix by the orders returned by get_order(feature_matrix.shape[0])
-
-    Args:
-        feature_matrix -  A numpy matrix describing the given data. Each row
-            represents a single data point.
-        labels - A numpy array where the kth element of the array is the
-            correct classification of the kth row of the feature matrix.
-        T - An integer indicating how many times the perceptron algorithm
-            should iterate through the feature matrix.
-
-    Returns: A tuple where the first element is a numpy array with the value of
-    theta, the linear classification parameter, after T iterations through the
-    feature matrix and the second element is a real number with the value of
-    theta_0, the offset classification parameter, after T iterations through
-    the feature matrix.
-    """
-    # Your code here
+    # Initialize weight vector and bias term to zeros
+    theta = np.zeros(feature_matrix.shape[1])
+    theta_0 = 0
+    
+    # Iterate over T epochs
     for t in range(T):
+        # Iterate over data points in a random order
         for i in get_order(feature_matrix.shape[0]):
-            # Your code here
-            pass
-    raise NotImplementedError
+            # Perform a single step update of the Perceptron algorithm
+            theta, theta_0 = perceptron_single_step_update(feature_matrix[i, :], labels[i], theta, theta_0)
+    
+    # Return the learned weight vector and bias term
+    return (theta, theta_0)
+
+
 
 
 def average_perceptron(feature_matrix, labels, T):
