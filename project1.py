@@ -184,8 +184,6 @@ def classify(feature_matrix, theta, theta_0):
     # Return the array of predicted labels.
     return predictions
 
-
-
 def classifier_accuracy(
         classifier,
         train_feature_matrix,
@@ -193,33 +191,20 @@ def classifier_accuracy(
         train_labels,
         val_labels,
         **kwargs):
-    """
-    Trains a linear classifier and computes accuracy.
-    The classifier is trained on the train data. The classifier's
-    accuracy on the train and validation data is then returned.
 
-    Args:
-        classifier - A classifier function that takes arguments
-            (feature matrix, labels, **kwargs) and returns (theta, theta_0)
-        train_feature_matrix - A numpy matrix describing the training
-            data. Each row represents a single data point.
-        val_feature_matrix - A numpy matrix describing the validation
-            data. Each row represents a single data point.
-        train_labels - A numpy array where the kth element of the array
-            is the correct classification of the kth row of the training
-            feature matrix.
-        val_labels - A numpy array where the kth element of the array
-            is the correct classification of the kth row of the validation
-            feature matrix.
-        **kwargs - Additional named arguments to pass to the classifier
-            (e.g. T or L)
-
-    Returns: A tuple in which the first element is the (scalar) accuracy of the
-    trained classifier on the training data and the second element is the
-    accuracy of the trained classifier on the validation data.
-    """
-    # Your code here
-    raise NotImplementedError
+    # Train the classifier on the training data.
+    theta, theta_0 = classifier(train_feature_matrix, train_labels, **kwargs)
+    
+    # Predict labels for the training and validation data using the trained classifier.
+    train_predict_labels = classify(train_feature_matrix, theta, theta_0)
+    val_predict_labels = classify(val_feature_matrix, theta, theta_0)
+    
+    # Calculate the accuracy of the classifier on the training and validation data.
+    train_accuracy = accuracy(train_predict_labels, train_labels)
+    val_accuracy = accuracy(val_predict_labels, val_labels)
+    
+    # Return the training and validation accuracies.
+    return (train_accuracy, val_accuracy)
 
 
 def extract_words(input_string):
