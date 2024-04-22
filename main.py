@@ -100,7 +100,6 @@ utils.plot_tune_results('Pegasos', 'L', Ls, *peg_tune_results_L)
 
 #Pegasos Algo as a best Method 
 
-
 T = 25  # Optimal value determined from validation
 L = 0.01  # Optimal value determined from validation
 
