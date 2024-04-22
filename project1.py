@@ -81,39 +81,30 @@ def perceptron(feature_matrix, labels, T):
     return (theta, theta_0)
 
 
-
-
 def average_perceptron(feature_matrix, labels, T):
-    """
-    Runs the average perceptron algorithm on a given set of data. Runs T
-    iterations through the data set, there is no need to worry about
-    stopping early.
 
-    NOTE: Please use the previously implemented functions when applicable.
-    Do not copy paste code from previous parts.
+    num_data_points = feature_matrix.shape[0]
+    theta = np.zeros(feature_matrix.shape[1])
+    theta_0 = 0
 
-    NOTE: Iterate the data matrix by the orders returned by get_order(feature_matrix.shape[0])
+    theta_cache = np.zeros(feature_matrix.shape[1])
+    theta_0_cache = 0
+    for _ in range(T):
+        for i in get_order(num_data_points):
+            # Check if the prediction is incorrect
+            if labels[i] * (np.dot(theta, feature_matrix[i, :]) + theta_0) <= 0:
+                # Update parameters using single step update function
+                theta, theta_0 = perceptron_single_step_update(feature_matrix[i, :], labels[i], theta, theta_0)
+            # Accumulate parameters for averaging
+            theta_cache += theta
+            theta_0_cache += theta_0
+    
+    # Calculate the average parameters
+    theta_final = theta_cache / (num_data_points * T)
+    theta_0_final = theta_0_cache / (num_data_points * T)
+    
+    return (theta_final, theta_0_final)
 
-
-    Args:
-        feature_matrix -  A numpy matrix describing the given data. Each row
-            represents a single data point.
-        labels - A numpy array where the kth element of the array is the
-            correct classification of the kth row of the feature matrix.
-        T - An integer indicating how many times the perceptron algorithm
-            should iterate through the feature matrix.
-
-    Returns: A tuple where the first element is a numpy array with the value of
-    the average theta, the linear classification parameter, found after T
-    iterations through the feature matrix and the second element is a real
-    number with the value of the average theta_0, the offset classification
-    parameter, found after T iterations through the feature matrix.
-
-    Hint: It is difficult to keep a running average; however, it is simple to
-    find a sum and divide.
-    """
-    # Your code here
-    raise NotImplementedError
 
 
 def pegasos_single_step_update(
