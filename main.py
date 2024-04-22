@@ -98,15 +98,27 @@ utils.plot_tune_results('Pegasos', 'L', Ls, *peg_tune_results_L)
 # test_bow_features and test_labels.
 #-------------------------------------------------------------------------------
 
-# Your code here
+#Pegasos Algo as a best Method 
+
+
+
+
+
+
+
+
+
+
+
+
 
 #-------------------------------------------------------------------------------
 # Assign to best_theta, the weights (and not the bias!) learned by your most
 # accurate algorithm with the optimal choice of hyperparameters.
 #-------------------------------------------------------------------------------
 
-# best_theta = None # Your code here
-# wordlist   = [word for (idx, word) in sorted(zip(dictionary.values(), dictionary.keys()))]
-# sorted_word_features = utils.most_explanatory_word(best_theta, wordlist)
-# print("Most Explanatory Word Features")
-# print(sorted_word_features[:10])
+best_theta = 0.8060 # Pegasos chosen as the best algorithm
+wordlist   = [word for (idx, word) in sorted(zip(dictionary.values(), dictionary.keys()))]
+sorted_word_features = utils.most_explanatory_word(best_theta, wordlist)
+print("Most Explanatory Word Features")
+print(sorted_word_features[:10])
