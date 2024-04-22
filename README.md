@@ -4,7 +4,7 @@
 The goal of this project is to design a classifier for sentiment analysis of product reviews. Our objective is to classify reviews written by Amazon customers for various food products as either positive or negative.
 
 ## Data Description
-
+![Alt Text](sentimentanalysistabledatasetexample.PNG)
 ### Overview
 The dataset consists of several reviews, each labeled with -1 or +1 corresponding to a negative or positive review, respectively. It's split into four files:
 
