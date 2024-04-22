@@ -4,7 +4,6 @@ import random
 
 # Part I
 
-
 def get_order(n_samples):
     try:
         # Try to open a file with the name 'n_samples.txt'
