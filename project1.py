@@ -128,7 +128,6 @@ def pegasos_single_step_update(
 
 def pegasos(feature_matrix, labels, T, L):
 
-
     (nsamples, nfeatures) = feature_matrix.shape
     theta = np.zeros(nfeatures)
     theta_0 = 0
