@@ -102,17 +102,31 @@ utils.plot_tune_results('Pegasos', 'L', Ls, *peg_tune_results_L)
 
 T = 25  # Optimal value determined from validation
 L = 0.01  # Optimal value determined from validation
+accuracies, thetas = p1.classifier_test_accuracy(p1.pegasos, train_bow_features, val_bow_features, test_bow_features, train_labels, val_labels, test_labels, T=T, L=L)
+train_accuracy, val_accuracy, test_accuracy = accuracies
+theta, theta_0 = thetas
 
-test_accuracy = p1.classifier_accuracy(p1.pegasos, train_bow_features, test_bow_features, train_labels, test_labels, T=T, L=L)
-print("{:.4f}".format("Test accuracy for Pegasos:", test_accuracy))
+print("Training accuracy:", train_accuracy)
+print("Validation accuracy:", val_accuracy)
+print("Test accuracy:", test_accuracy)
+print("Theta:", theta)
+print("Theta_0:", theta_0)
+
 
 #-------------------------------------------------------------------------------
 # Assign to best_theta, the weights (and not the bias!) learned by your most
 # accurate algorithm with the optimal choice of hyperparameters.
 #-------------------------------------------------------------------------------
 
-best_theta = 0.8060 # Pegasos chosen as the best algorithm
-wordlist   = [word for (idx, word) in sorted(zip(dictionary.values(), dictionary.keys()))]
+
+best_theta = theta 
+
+wordlist = [word for (idx, word) in sorted(zip(dictionary.values(), dictionary.keys()))]
 sorted_word_features = utils.most_explanatory_word(best_theta, wordlist)
 print("Most Explanatory Word Features")
-print(sorted_word_features[:10])
+print(sorted_word_features[:10]) 
+
+# According to the largest weights (i.e. individual  values in our vector), 
+# we can found out which unigrams were the most impactful ones in predicting positive labels :
+#['delicious', 'great', '!', 'best', 'perfect', 'loves', 'wonderful', 'glad', 'love', 'quickly']
+

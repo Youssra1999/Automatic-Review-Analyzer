@@ -206,6 +206,25 @@ def classifier_accuracy(
     # Return the training and validation accuracies.
     return (train_accuracy, val_accuracy)
 
+def classifier_test_accuracy(classifier, train_feature_matrix, val_feature_matrix, test_feature_matrix, train_labels, val_labels, test_labels, **kwargs):
+    # Train the classifier on the training data.
+    theta, theta_0 = classifier(train_feature_matrix, train_labels, **kwargs)
+    
+    # Predict labels for the training, validation, and test data using the trained classifier.
+    train_predict_labels = classify(train_feature_matrix, theta, theta_0)
+    val_predict_labels = classify(val_feature_matrix, theta, theta_0)
+    test_predict_labels = classify(test_feature_matrix, theta, theta_0)
+    
+    # Calculate the accuracy of the classifier on the training, validation, and test data.
+    train_accuracy = accuracy(train_predict_labels, train_labels)
+    val_accuracy = accuracy(val_predict_labels, val_labels)
+    test_accuracy = accuracy(test_predict_labels, test_labels)
+    
+    # Return the training, validation, and test accuracies along with theta.
+    return (train_accuracy, val_accuracy, test_accuracy), (theta, theta_0)
+
+
+
 
 def extract_words(input_string):
     
