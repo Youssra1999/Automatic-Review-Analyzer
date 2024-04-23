@@ -145,7 +145,7 @@ def pegasos(feature_matrix, labels, T, L):
             count += 1
             
             # Calculate the learning rate (eta) for the current iteration.
-            eta = 1.0 / np.sqrt(count)
+            eta = 1.0 / np.sqrt(count) 
             
             # Perform a single step update of the Pegasos algorithm.
             (theta, theta_0) = pegasos_single_step_update(
