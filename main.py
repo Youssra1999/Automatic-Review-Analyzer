@@ -3,7 +3,7 @@ import utils
 import numpy as np
 
 #-------------------------------------------------------------------------------
-# Data loading. 
+# Data loading
 #-------------------------------------------------------------------------------
 
 train_data = utils.load_data('reviews_train.tsv')
