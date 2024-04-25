@@ -2,6 +2,7 @@
 
 ## Introduction
 The goal of this project is to design a classifier for sentiment analysis of product reviews. Our objective is to classify reviews written by Amazon customers for various food products as either positive or negative.
+![Image](Pink Black Photocentric Neon Tech Talk Podcast Instagram Post (1).png)
 
 ## Data Description
 ![Alt Text](sentimentanalysistabledatasetexample.PNG)
